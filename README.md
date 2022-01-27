@@ -25,21 +25,21 @@ To access my Rocket.Chat environment please use the information below:
 Below you will find the results of the requested tests:
   
   <details><summary>1. Create a new user via an API endpoint</summary><br>
-    <p>Admin user:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/0-Creating-New-Admin-User.png" height="400px">
-    <p>Regular user:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/01-Creating-New-User.png" height="400px">
-    <p>Regular user logged in:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/1-New-User-Logged-In.png" height="400px" width="1000px">    
+    <li>Admin user:</li><br>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/0-Creating-New-Admin-User.png" ><br>
+    <li>Regular user:</li><br>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/01-Creating-New-User.png"><br>
+    <li>Regular user logged in:</li><br>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/1-New-User-Logged-In.png"><br>
   </details>
     <br>
     
   <details><summary>2. Get the room information via an API endpoint</summary><br>    
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/2-Room-Information.png" height="400px">    
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/2-Room-Information.png">    
   </details><br>
   
    <details><summary>3. Get a list of all user roles in the system via an API endpoin</summary><br>    
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/3-List-Of-Users-And-Roles.png" height="400px">
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/3-List-Of-Users-And-Roles.png">
    </details><br>
 
 ## 3. Deployment Choice
@@ -377,5 +377,7 @@ I was curious about setting a Rocket.CHat instace in my own computer as well. Th
       ```
   
   6. Use it!<br>      
+     You may use of one of the addresses provided in the "forwarding" field.<br>
+     In my case, the url is https://a51a-186-220-235-236.ngrok.io/.
      <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/4-Localhost-Server.png">
   </details>
