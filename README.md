@@ -70,15 +70,246 @@ Click on "Allocate New Address"</li>
 <details><summary>Add the AWS DNS server to your Domain registrar</summary>
 <p><br>
 Once you finish creating your "Route 53" hosted zone, the dashboard should display the AWS DNS servers for which the trafic should be routed to:
-
+<img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/DNS-Servers.png">
 
 These servers should be added as DNS servers for your domain.
 
-In my case, my domain registrar is Registro.br. I accomplished this by:
+In my case, my domain registrar is Registro.br. I accomplished this by following the steps below:
 
 <li>Log in to registro.br with my personal account and selecting the desired domain. </li>
 <li>Navigate to the "DNS" section of the page and click on "Change DNS Servers"</li>
 <li>Add each one of the servers provided by AWS on the list and click "ok"</li>
 <li>It will probably be needed to wait for a few hours for the changes to take place</li>
+</p>
+</details>
+
+<details><summary>Get an SSL certificate from Let's Encrypt</summary>
+<p><br>
+  
+<li>Access the EC2 instance via SSH:  </li>
+  
+ ```
+  ssh -i <path_to_key_file.pem> ubuntu@<public_ip_address> 
+ ```  
+
+Install certbot using apt:
+  
+  ```
+ sudo apt update
+ sudo apt install certbot  
+  ```
+ 
+Obtain certificate from Let's Encrypt:
+  
+   ```
+  sudo certbot certonly --standalone --email <emailaddress@email.com> -d <domain.com> -d <subdomain.domain.com>
+  
+  ```
+</p>
+</details>
+  
+
+<details><summary>Set up a Web Server using Nginx</summary>
+<p><br>
+  
+Install Nginx web server:
+  
+ ```
+  sudo apt-get install nginx
+ ```  
+
+Backup the default config file for reference:
+  
+  ```
+ cd /etc/nginx/sites-available
+ sudo mv default default.reference 
+  ```
+ 
+Create a new site configuration for Rocket.Chat:
+  
+   ```
+  sudo nano /etc/nginx/sites-available/default
+  
+  ```
+The configuration file should contain these details listed below. Make sure to replace ABC.DOMAIN.COM with your domain (it appears 4 times). Make sure to update it in the path to your key files as well.
+  
+  ```
+   server {
+     listen 443 ssl;
+
+     server_name <ABC.DOMAIN.COM>;
+
+     ssl_certificate /etc/letsencrypt/live/<ABC.DOMAIN.COM>/fullchain.pem;
+     ssl_certificate_key /etc/letsencrypt/live/<ABC.DOMAIN.COM>/privkey.pem;
+     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+     ssl_prefer_server_ciphers on;
+     ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+
+     root /usr/share/nginx/html;
+     index index.html index.htm;
+
+     # Make site accessible from http://localhost/
+     server_name localhost;
+
+     location / {
+         proxy_pass http://localhost:3000/;
+         proxy_http_version 1.1;
+         proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection "upgrade";
+         proxy_set_header Host $http_host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Proto http;
+         proxy_set_header X-Nginx-Proxy true;
+         proxy_redirect off;
+     }
+ }
+
+ server {
+     listen 80;
+
+     server_name <ABC.DOMAIN.COM>;
+
+     return 301 https://$host$request_uri;
+ }
+  
+  ```
+
+Test the Nginx configuration to make sure there are no syntax errors:
+  
+   ```
+   sudo nginx -t
+   ```
+  
+If the syntax test went successful, restart Nginx:
+  
+  ```
+  sudo systemctl restart nginx
+  ```
+Confirm that it is running properly by opening a web browser and going to your domain name. You will get a page stating "502 Bad Gateway". This is expected, since the Rocket.Chat backend is not yet running. Make sure the SSL connection is working properly by clicking the lock icon next to the address bar, make sure it's valid and issued by "Let's Encrypt Authority X3". 
+</p>
+</details>
+
+<details><summary>Install Docker and Docker Compose</summary>
+<p><br>
+  
+Install Docker (and any dependencies):
+  
+ ```
+ sudo apt-get update
+ sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ sudo apt-key fingerprint 0EBFCD88
+ # confirm the fingerprint matches "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88"
+ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+  
+ ```  
+
+Install docker-compose:
+  
+  ```
+ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ sudo chmod +x /usr/local/bin/docker-compose
+  ```
+ 
+</p>
+</details>
+  
+<details><summary>Set up the Docker Containers</summary>
+<p><br>
+  
+Create local directories:
+  
+ ```
+ sudo mkdir -p /opt/docker/rocket.chat/data/runtime/db
+ sudo mkdir -p /opt/docker/rocket.chat/data/dump
+  
+ ```  
+
+Create the docker-compose.yml file:
+  
+  ```
+  sudo nano /opt/docker/rocket.chat/docker-compose.yml
+  ```
+
+Add the configuration details below. Make sure to replace ABC.DOMAIN.COM with your actual domain name again:
+  
+  ```
+   version: '2'
+
+ services:
+   rocketchat:
+     image: rocket.chat:latest
+     command: >
+       bash -c
+         "for i in `seq 1 30`; do
+           node main.js &&
+           s=$$? && break || s=$$?;
+           echo \"Tried $$i times. Waiting 5 secs...\";
+           sleep 5;
+         done; (exit $$s)"
+     restart: unless-stopped
+     volumes:
+       - ./uploads:/app/uploads
+     environment:
+       - PORT=3000
+       - ROOT_URL=https://<ABC.DOMAIN.COM>
+       - MONGO_URL=mongodb://mongo:27017/rocketchat
+       - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+     depends_on:
+       - mongo
+     ports:
+       - 3000:3000
+
+   mongo:
+     image: mongo:4.0
+     restart: unless-stopped
+     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
+     volumes:
+       - ./data/runtime/db:/data/db
+       - ./data/dump:/dump
+
+   # this container's job is just to run the command to initialize the replica set.
+   # it will run the command and remove himself (it will not stay running)
+   mongo-init-replica:
+     image: mongo:4.0
+     command: >
+       bash -c
+         "for i in `seq 1 30`; do
+           mongo mongo/rocketchat --eval \"
+             rs.initiate({
+               _id: 'rs0',
+               members: [ { _id: 0, host: 'localhost:27017' } ]})\" &&
+           s=$$? && break || s=$$?;
+           echo \"Tried $$i times. Waiting 5 secs...\";
+           sleep 5;
+         done; (exit $$s)"
+     depends_on:
+     - mongo
+  ```
+  
+Start containers:
+  
+  ```
+ cd /opt/docker/rocket.chat
+ sudo docker-compose up -d
+  ```
+
+Wait a bit for the replica set to be initialized for MongoDB (about 30-60 seconds) and confirm Rocket.Chat is running properly:
+  
+  ```
+  sudo docker-compose logs -f rocketchat
+  ```
+</p>
+</details>
+  
+<details><summary>Use it!</summary>
+<p><br>
+  
+Login to your site. In my case, it is https://www.murilo.tec.br.  
+Note: the first user to login will be an administrator user.
+
 </p>
 </details>
