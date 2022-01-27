@@ -47,9 +47,17 @@ Below you will find the results of the requested tests:
 I have chosen to deploy my server using an AWS EC2 instance due to the following reasons:
 
 - To have full control over my deployment.
-- It was a good opportunity to practice using the AWS DNS service, named Route 53. 
-- I could use a personal domain I already own for hosting the web server.
+- It was a good opportunity to learn how to use the AWS DNS service named Route 53. 
+- I already own a domain that could be used for the web server.
 - It also allowed me to generate a SSL certificate for using HTTPS.
+
+Additional:
+
+- I have also deployed Rocket.Chat in a local virtual machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. It can be accesed on https://a51a-186-220-235-236.ngrok.io/. **
+
+**If you would like to access the my local VM as well please let me know so I can launch it. It is currently powered off due to performance concerns :upside_down_face:
+
+
 <br>
 
 ## 4. Installation Process
@@ -342,3 +350,33 @@ Note: the first user to login will be an administrator user.
    
 ## 5. Additional
   
+I was curious about setting a Rocket.CHat instace in my own computer as well. Therefore, I have also performed a second deployment in a Virtual Machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. 
+  
+  <details><summary>The installation steps are listed here:</summary>
+  
+  1. Install Oracle VirtualBox - https://www.virtualbox.org/wiki/Downloads
+  2. Download the Ubuntu 20.04.3 LTS ISO - https://ubuntu.com/download/desktop
+  3. Create a local virtual machine running Ubuntu. Configuration steps on: 
+      https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview
+  4. Install it on the Linux VM using the Rocket.Chat Snap:
+    
+      ```
+      sudo snap install rocketchat-server
+      ```
+  5. Install and configure Ngrok :       
+
+      ```
+      sudo apt update
+      sudo apt install snapd
+      sudo snap install ngrok
+      ```
+
+      Then create the tunnel:
+      ```
+      ngrok http 3000
+      ```
+  
+  6. Use it!<br>
+      My localhost server: https://a51a-186-220-235-236.ngrok.io/.
+     <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/4-Localhost-Server.png">
+  </details>
