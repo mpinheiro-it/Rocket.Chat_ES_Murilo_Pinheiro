@@ -53,9 +53,7 @@ I have chosen to deploy my server using an AWS EC2 instance due to the following
 
 Additional:
 
-- I have also deployed Rocket.Chat in a local virtual machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. It can be accesed on https://a51a-186-220-235-236.ngrok.io/. **
-
-  **If you would like to access the my local VM as well please let me know so I can launch it. It is currently powered off due to performance concerns :upside_down_face:
+- I have also deployed Rocket.Chat in a local virtual machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. The implementation details are described on the <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#5-Additional">item 5</a> of this document.
 
 
 <br>
@@ -350,7 +348,9 @@ Note: the first user to login will be an administrator user.
    
 ## 5. Additional
   
-I was curious about setting a Rocket.CHat instace in my own computer as well. Therefore, I have also performed a second deployment in a Virtual Machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. 
+I was curious about setting a Rocket.CHat instace in my own computer as well. Therefore, I have also performed a second deployment in a Virtual Machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. My localhost server can be accesed on https://a51a-186-220-235-236.ngrok.io/. **
+
+  **If you would like to access the my local VM as well please let me know so I can launch it. It is currently powered off due to performance concerns :upside_down_face:
   
   <details><summary>The installation steps are listed here:</summary>
   
@@ -376,7 +376,6 @@ I was curious about setting a Rocket.CHat instace in my own computer as well. Th
       ngrok http 3000
       ```
   
-  6. Use it!<br>
-      My localhost server: https://a51a-186-220-235-236.ngrok.io/.
+  6. Use it!<br>      
      <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/4-Localhost-Server.png">
   </details>
