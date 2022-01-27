@@ -4,10 +4,11 @@
 
 ## Index
 1. Accessing the Environment
-2. Deployment Choice
-3. Installation Process
-4. Results
+2. Results
+3. Deployment Choice
+4. Installation Process
 5. Additional
+<br>
 
 ## 1. Accessing the environment
 
@@ -18,16 +19,40 @@ To access my Rocket.Chat environment please use the information below:
 | URL  | www.murilo.tec.br  |
 | Username:  | test.user  |
 | Password:  | 940TMj$MNoh_1/#Z  |
+<br>
 
-## 2. Deployment Choice
+## 2. Results
+Below you will find the results of the requested tests:
+  
+  <details><summary>1. Create a new user via an API endpoint</summary><br>
+    <p>Admin user:</p>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/0-Creating-New-Admin-User.png" height="400px">
+    <p>Regular user:</p>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/01-Creating-New-User.png" height="400px">
+    <p>Regular user logged in:</p>
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/1-New-User-Logged-In.png" height="400px" width="1000px">    
+  </details>
+    <br>
+    
+  <details><summary>2. Get the room information via an API endpoint</summary><br>    
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/2-Room-Information.png" height="400px">    
+  </details><br>
+  
+   <details><summary>3. Get a list of all user roles in the system via an API endpoin</summary><br>    
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/3-List-Of-Users-And-Roles.png" height="400px">
+   </details><br>
+
+## 3. Deployment Choice
 
 I have chosen to deploy my server using an AWS EC2 instance due to the following reasons:
 
 - To have full control over my deployment.
 - It was a good opportunity to practice using the AWS DNS service, named Route 53. 
 - I could use a personal domain I already own for hosting the web server.
+- It also allowed me to generate a SSL certificate for using HTTPS.
+<br>
 
-## 3. Installation Process
+## 4. Installation Process
 
 <details><summary>Launch an AWS EC2 Instance</summary>
 <p><br>
@@ -313,3 +338,7 @@ Note: the first user to login will be an administrator user.
 
 </p>
 </details>
+<br>
+   
+## 5. Additional
+  
