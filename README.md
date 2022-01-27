@@ -26,20 +26,20 @@ Below you will find the results of the requested tests:
   
   <details><summary>1. Create a new user via an API endpoint</summary><br>
     <p>Admin user:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/0-Creating-New-Admin-User.png" height="400px">
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/0-Creating-New-Admin-User.png" height="400px">
     <p>Regular user:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/01-Creating-New-User.png" height="400px">
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/01-Creating-New-User.png" height="400px">
     <p>Regular user logged in:</p>
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/1-New-User-Logged-In.png" height="400px" width="1000px">    
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/1-New-User-Logged-In.png" height="400px" width="1000px">    
   </details>
     <br>
     
   <details><summary>2. Get the room information via an API endpoint</summary><br>    
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/2-Room-Information.png" height="400px">    
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/2-Room-Information.png" height="400px">    
   </details><br>
   
    <details><summary>3. Get a list of all user roles in the system via an API endpoin</summary><br>    
-    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/3-List-Of-Users-And-Roles.png" height="400px">
+    <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/3-List-Of-Users-And-Roles.png" height="400px">
    </details><br>
 
 ## 3. Deployment Choice
@@ -103,7 +103,7 @@ Click on "Allocate New Address"</li>
 <details><summary>Add the AWS DNS server to your Domain registrar</summary>
 <p><br>
 Once you finish creating your "Route 53" hosted zone, the dashboard should display the AWS DNS servers for which the trafic should be routed to:
-<img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/DNS-Servers.png">
+<img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/DNS-Servers.png">
 
 These servers should be added as DNS servers for your domain.
 
@@ -378,5 +378,5 @@ I was curious about setting a Rocket.CHat instace in my own computer as well. Th
   
   6. Use it!<br>
       My localhost server: https://a51a-186-220-235-236.ngrok.io/.
-     <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/4-Localhost-Server.png">
+     <img src="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/img/4-Localhost-Server.png">
   </details>
