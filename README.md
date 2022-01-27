@@ -3,11 +3,11 @@
 <img src="https://itcraftapps.com/wp-content/uploads/2019/05/rocket-1.png" height="600px">
 
 ## Index
-1. Accessing the Environment
-2. Results
-3. Deployment Choice
-4. Installation Process
-5. Additional
+1. <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#1-accessing-the-environment">Accessing the Environment</a>
+2. <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#2-results">Results</a>
+3. <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#3-deployment-choice">Deployment Choice</a>
+4. <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#4-installation-process">Installation Process</a>
+5. <a href="https://github.com/mpinheiro-it/Rocket.Chat_ES_Murilo_Pinheiro/blob/main/README.md#5-Additional">Additional</a>
 <br>
 
 ## 1. Accessing the environment
@@ -55,7 +55,7 @@ Additional:
 
 - I have also deployed Rocket.Chat in a local virtual machine running Ubuntu and used NGrok to create a tunnel to expose the local server to the internet. It can be accesed on https://a51a-186-220-235-236.ngrok.io/. **
 
-**If you would like to access the my local VM as well please let me know so I can launch it. It is currently powered off due to performance concerns :upside_down_face:
+  **If you would like to access the my local VM as well please let me know so I can launch it. It is currently powered off due to performance concerns :upside_down_face:
 
 
 <br>
